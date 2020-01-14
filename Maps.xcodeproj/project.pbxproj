@@ -60,12 +60,11 @@
 		D75B830A234B4B5E00378C7D /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				D7B55E6523CD56A800170E81 /* Controller */,
+				D7B55E6423CD56A000170E81 /* Model */,
+				D7B55E6323CD569600170E81 /* View */,
 				D75B830B234B4B5E00378C7D /* AppDelegate.swift */,
 				D75B830D234B4B5E00378C7D /* SceneDelegate.swift */,
-				D75B830F234B4B5E00378C7D /* MapViewController.swift */,
-				D75B8311234B4B5E00378C7D /* Main.storyboard */,
-				D75B8314234B4B5F00378C7D /* Assets.xcassets */,
-				D75B8316234B4B5F00378C7D /* LaunchScreen.storyboard */,
 				D75B8319234B4B5F00378C7D /* Info.plist */,
 			);
 			path = Maps;
@@ -77,6 +76,31 @@
 				D75B8320234B5D0200378C7D /* CoreLocation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D7B55E6323CD569600170E81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D75B8311234B4B5E00378C7D /* Main.storyboard */,
+				D75B8316234B4B5F00378C7D /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D7B55E6423CD56A000170E81 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D75B8314234B4B5F00378C7D /* Assets.xcassets */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D7B55E6523CD56A800170E81 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D75B830F234B4B5E00378C7D /* MapViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
