@@ -14,8 +14,11 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    // MARK: Outlets
+    
     @IBOutlet weak var mapView: MKMapView!
     
+    // MARK: Variables
     //Serve para gerenciar a minha localização
     var delegationLocation = CLLocationManager()
     
@@ -27,7 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        markerLocationMap(withTitle: "Base de área de Manaus", andSubTitle: "Base onde pousa os aviões militares de Manaus")
+        // markerLocationMap(withTitle: "Base de área de Manaus", andSubTitle: "Base onde pousa os aviões militares de Manaus")
         
         //aqui digo que o responsavel por gerenciar o objeto delegationLocation será essa própria classe
         delegationLocation.delegate = self
@@ -45,7 +48,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         delegationLocation.startUpdatingLocation()
         
     }
+    
+    //MARK: Methods
+    
+    fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
+        //marcado no mapa
+        let annotation = MKPointAnnotation()
+        
+        //configurar
+        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
+        annotation.title = title
+        annotation.subtitle = subtitle
+        
+        mapView.addAnnotation(annotation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let userLocation: CLLocation = locations.last else { return }
+        setupLocationMap(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+    }
+    
+}
 
+    // MARK: Logic Maps
+
+extension MapViewController {
     fileprivate func setupLocationMap(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocationCoordinate2D {
         
         //set as coordenadas em coordenada em 2d
@@ -67,18 +95,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         return location
     }
-    
-    fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
-        //marcado no mapa
-        let annotation = MKPointAnnotation()
-        
-        //configurar
-        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
-        annotation.title = title
-        annotation.subtitle = subtitle
-        
-        mapView.addAnnotation(annotation)
-    }
-    
 }
 
