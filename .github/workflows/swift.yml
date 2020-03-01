@@ -1,0 +1,11 @@
+name: Swift
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: xcodebuild -project 'Maps.xcodeproj' -scheme 'Maps' -destination 'generic/platform=iOS' -configuration Release build CODE_SIGNING_ALLOWED=NO
