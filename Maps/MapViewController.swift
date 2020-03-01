@@ -21,8 +21,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     //coordenadas do locais
     //ex: base área de manaus
-     let latitude: CLLocationDegrees = -3.141511
-     let longitude: CLLocationDegrees = -59.992229
+    let latitude: CLLocationDegrees = -3.141511
+    let longitude: CLLocationDegrees = -59.992229
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         delegationLocation.startUpdatingLocation()
         
     }
-
+    
     fileprivate func setupLocationMap(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocationCoordinate2D {
         
         //set as coordenadas em coordenada em 2d
@@ -78,6 +78,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         annotation.subtitle = subtitle
         
         mapView.addAnnotation(annotation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        if status != .authorizedWhenInUse {
+            var alertController = UIAlertController(title: "Permissão para localização?",
+                                                    message: """
+ Necessário permissão para acesso à sua localização!! Por favor habilite.
+ """,
+                                                    preferredStyle: .alert)
+            var configurationAction = UIAlertAction(title: "Abrir configurações", style: .default, handler: {
+                alertConfigure in
+                if let configuration = NSURL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(configuration as URL)
+                }
+            })
+            
+            var cancelAction = UIAlertAction(title: "Cancelar", style: .default)
+            
+            alertController.addAction(configurationAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true)
+        }
+        
     }
     
 }
