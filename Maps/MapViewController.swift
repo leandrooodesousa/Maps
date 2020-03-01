@@ -17,6 +17,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK: Outlets
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var latitudeLabel: UILabel!
+    @IBOutlet weak var longitudeLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var speedLabel: UILabel!
     
     // MARK: Variables
     //Serve para gerenciar a minha localização
@@ -24,8 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     //coordenadas do locais
     //ex: base área de manaus
-    let latitude: CLLocationDegrees = -3.141511
-    let longitude: CLLocationDegrees = -59.992229
+//    let latitude: CLLocationDegrees = -3.141511
+//    let longitude: CLLocationDegrees = -59.992229
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,22 +55,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     //MARK: Methods
     
-    fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
-        //marcado no mapa
-        let annotation = MKPointAnnotation()
-        
-        //configurar
-        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
-        annotation.title = title
-        annotation.subtitle = subtitle
-        
-        mapView.addAnnotation(annotation)
-    }
-    
+//    fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
+//        //marcado no mapa
+//        let annotation = MKPointAnnotation()
+//        
+//        //configurar
+//        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
+//        annotation.title = title
+//        annotation.subtitle = subtitle
+//        
+//        mapView.addAnnotation(annotation)
+//    }
+//    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let userLocation: CLLocation = locations.last else { return }
-        setupLocationMap(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+       // setupLocationMap(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        var latitude = userLocation.coordinate.latitude
+        var longitude = userLocation.coordinate.longitude
+        
+        longitudeLabel.text = String(longitude)
+        latitudeLabel.text = String(latitude)
+        
+        speedLabel.text = String(userLocation.speed)
     }
     
     // MARK: Logic Maps

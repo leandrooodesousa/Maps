@@ -75,7 +75,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="6fl-YK-pzb">
-                                        <rect key="frame" x="138.33333333333334" y="47" width="174.00000000000003" height="108"/>
+                                        <rect key="frame" x="138.33333333333334" y="47" width="122.33333333333334" height="108"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="xkn-lc-2pi">
                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="108"/>
@@ -105,45 +105,34 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="caM-gX-SHJ">
-                                                <rect key="frame" x="107" y="0.0" width="67" height="108"/>
+                                                <rect key="frame" x="107" y="0.0" width="15.333333333333329" height="108"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rt1-mS-V0J">
-                                                        <rect key="frame" x="0.0" y="0.0" width="67" height="20.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="15.333333333333334" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5n-33-DPa">
-                                                        <rect key="frame" x="0.0" y="43.333333333333343" width="67" height="20.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="43.333333333333343" width="15.333333333333334" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRt-mF-8pE">
-                                                        <rect key="frame" x="0.0" y="86.666666666666657" width="67" height="21.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="86.666666666666657" width="15.333333333333334" height="21.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="108" id="MJs-aF-t7V"/>
-                                                    <constraint firstAttribute="width" constant="67" id="fjU-lU-gUf"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="xkn-lc-2pi" firstAttribute="top" secondItem="6fl-YK-pzb" secondAttribute="top" id="3l0-Ol-dKT"/>
-                                            <constraint firstItem="caM-gX-SHJ" firstAttribute="leading" secondItem="xkn-lc-2pi" secondAttribute="trailing" constant="23" id="HZe-cI-cbw"/>
-                                            <constraint firstAttribute="bottom" secondItem="caM-gX-SHJ" secondAttribute="bottom" id="NzZ-Yp-OFJ"/>
-                                            <constraint firstItem="caM-gX-SHJ" firstAttribute="top" secondItem="6fl-YK-pzb" secondAttribute="top" id="Ulr-Vu-Ta9"/>
-                                            <constraint firstAttribute="bottom" secondItem="xkn-lc-2pi" secondAttribute="bottom" id="efe-Oe-k02"/>
-                                            <constraint firstAttribute="trailing" secondItem="caM-gX-SHJ" secondAttribute="trailing" id="hH4-ny-YFq"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="0.33692781690140844" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6fl-YK-pzb" secondAttribute="trailing" constant="8" id="0nl-to-gcQ"/>
                                     <constraint firstItem="6fl-YK-pzb" firstAttribute="leading" secondItem="EM0-0F-XbF" secondAttribute="trailing" constant="36" id="6pc-qs-nRy"/>
                                     <constraint firstItem="6fl-YK-pzb" firstAttribute="leading" secondItem="O8S-IQ-WtI" secondAttribute="trailing" constant="29.5" id="G0y-Pi-L1t"/>
                                     <constraint firstItem="6fl-YK-pzb" firstAttribute="top" secondItem="awq-2t-f18" secondAttribute="top" constant="47" id="RhR-5T-Ntp"/>
@@ -176,7 +165,11 @@
                         <viewLayoutGuide key="safeArea" id="7u6-b4-j2P"/>
                     </view>
                     <connections>
+                        <outlet property="addressLabel" destination="eRt-mF-8pE" id="mzH-GT-fGl"/>
+                        <outlet property="latitudeLabel" destination="Rt1-mS-V0J" id="Glm-Xj-dTy"/>
+                        <outlet property="longitudeLabel" destination="G5n-33-DPa" id="fbK-J3-rVB"/>
                         <outlet property="mapView" destination="HnI-YE-w0m" id="Azr-Sr-fDX"/>
+                        <outlet property="speedLabel" destination="EM0-0F-XbF" id="Heq-xg-bXR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVl-g3-MFw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
