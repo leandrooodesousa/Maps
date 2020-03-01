@@ -49,8 +49,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-<<<<<<< HEAD
-=======
     //MARK: Methods
     
     fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
@@ -71,12 +69,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         setupLocationMap(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
     }
     
-}
-
     // MARK: Logic Maps
-
-extension MapViewController {
->>>>>>> master
+    
     fileprivate func setupLocationMap(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocationCoordinate2D {
         
         //set as coordenadas em coordenada em 2d
@@ -97,19 +91,6 @@ extension MapViewController {
         mapView.setRegion(region, animated: true)
         
         return location
-    }
-<<<<<<< HEAD
-    
-    fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
-        //marcado no mapa
-        let annotation = MKPointAnnotation()
-        
-        //configurar
-        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
-        annotation.title = title
-        annotation.subtitle = subtitle
-        
-        mapView.addAnnotation(annotation)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -136,8 +117,6 @@ extension MapViewController {
         }
         
     }
-    
-=======
->>>>>>> master
 }
+
 
