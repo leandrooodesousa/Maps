@@ -28,8 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     //coordenadas do locais
     //ex: base área de manaus
-//    let latitude: CLLocationDegrees = -3.141511
-//    let longitude: CLLocationDegrees = -59.992229
+    //    let latitude: CLLocationDegrees = -3.141511
+    //    let longitude: CLLocationDegrees = -59.992229
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,29 +55,45 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     //MARK: Methods
     
-//    fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
-//        //marcado no mapa
-//        let annotation = MKPointAnnotation()
-//        
-//        //configurar
-//        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
-//        annotation.title = title
-//        annotation.subtitle = subtitle
-//        
-//        mapView.addAnnotation(annotation)
-//    }
-//    
+    //    fileprivate func markerLocationMap(withTitle title: String,andSubTitle subtitle: String) {
+    //        //marcado no mapa
+    //        let annotation = MKPointAnnotation()
+    //
+    //        //configurar
+    //        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
+    //        annotation.title = title
+    //        annotation.subtitle = subtitle
+    //
+    //        mapView.addAnnotation(annotation)
+    //    }
+    //
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let userLocation: CLLocation = locations.last else { return }
-       // setupLocationMap(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        var latitude = userLocation.coordinate.latitude
-        var longitude = userLocation.coordinate.longitude
+        let annotation = MKPointAnnotation()
+        
+        // setupLocationMap(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        let latitude = userLocation.coordinate.latitude
+        let longitude = userLocation.coordinate.longitude
         
         longitudeLabel.text = String(longitude)
         latitudeLabel.text = String(latitude)
+        annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
         
         speedLabel.text = String(userLocation.speed)
+        mapView.addAnnotation(annotation)
+        
+        CLGeocoder().reverseGeocodeLocation(userLocation) { (detail, error) in
+            if error == nil {
+                guard let dateLocal = detail?.first,
+                    let thoroughFare = dateLocal.thoroughfare,
+                    let subThoroughFare = dateLocal.subThoroughfare else { return }
+                    print(thoroughFare)
+                
+            } else {
+                print("Error:" + (error?.localizedDescription ?? "error"))
+            }
+        }
     }
     
     // MARK: Logic Maps
@@ -85,7 +101,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     fileprivate func setupLocationMap(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocationCoordinate2D {
         
         //set as coordenadas em coordenada em 2d
-        let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         
         //O delta é a diferenca de uma tela entre a horizontal e a vertical
         let deltaLatitude: CLLocationDegrees = 0.01
@@ -107,19 +123,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         if status != .authorizedWhenInUse {
-            var alertController = UIAlertController(title: "Permissão para localização?",
+            let alertController = UIAlertController(title: "Permissão para localização?",
                                                     message: """
  Necessário permissão para acesso à sua localização!! Por favor habilite.
  """,
                                                     preferredStyle: .alert)
-            var configurationAction = UIAlertAction(title: "Abrir configurações", style: .default, handler: {
+            let configurationAction = UIAlertAction(title: "Abrir configurações", style: .default, handler: {
                 alertConfigure in
                 if let configuration = NSURL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(configuration as URL)
                 }
             })
             
-            var cancelAction = UIAlertAction(title: "Cancelar", style: .default)
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .default)
             
             alertController.addAction(configurationAction)
             alertController.addAction(cancelAction)
