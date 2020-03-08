@@ -80,15 +80,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         latitudeLabel.text = String(latitude)
         annotation.coordinate = setupLocationMap(latitude: latitude, longitude: longitude)
         
-        speedLabel.text = String(userLocation.speed)
-        mapView.addAnnotation(annotation)
+        if userLocation.speed > 0 {
+            speedLabel.text = String(userLocation.speed)
+        }
+        // mapView.addAnnotation(annotation)
         
         CLGeocoder().reverseGeocodeLocation(userLocation) { (detail, error) in
             if error == nil {
                 guard let dateLocal = detail?.first,
                     let thoroughFare = dateLocal.thoroughfare,
                     let subThoroughFare = dateLocal.subThoroughfare else { return }
-                    print(thoroughFare)
+                print("Rua: \(thoroughFare)\nNumero: \(subThoroughFare)")
+                self.addressLabel.text = "\(thoroughFare), \(subThoroughFare)"
                 
             } else {
                 print("Error:" + (error?.localizedDescription ?? "error"))
